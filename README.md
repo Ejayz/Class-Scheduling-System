@@ -3,7 +3,7 @@ Welcome this is Class Scheduling System made by me.
 
 This scheduling system will help you manage your schedules in your school.
 <br>
-<b>Downlaod Ready Compiled [here](http://roydesu.epizy.com/upload/dist.zip/dist.zip)</b>
+<b>Download Compiled Version [here](http://roydesu.epizy.com/upload/dist.zip/dist.zip)</b>
 
 
 This system requires the following:
@@ -13,8 +13,8 @@ This system requires the following:
 
 <b>Installation</b>
 <ul>
- <li>Install your jdk and jre download the files </li>
-  <li> Install your Mysql database. Give your mysql database a root password:<b>1234</b></li>
+ <li>Install your jdk and jre </li>
+  <li> Install your Mysql database.Give your mysql database a root password:<b>1234</b></li>
  <li>Run the file at <b>/dist/CS_SYSTEM.JAR</b>.</li>
  <li> You will see the EULA.Accept the agreement and wait while it will automatically open up the login page </li>
   
