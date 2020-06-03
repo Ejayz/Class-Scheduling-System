@@ -3,9 +3,7 @@ Welcome this is Class Scheduling System made by me.
 
 This scheduling system will help you manage your schedules in your school.
 <br>
-
-
-
+<b>Downlaod Ready Compiled [here](http://roydesu.epizy.com/upload/dist.zip/dist.zip)</b>
 
 
 This system requires the following:
