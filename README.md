@@ -2,9 +2,11 @@
 Welcome this is Class Scheduling System made by me.
 
 This scheduling system will help you manage your schedules in your school.
+<br>
 This system requires the following:
+<br>
 
--Java JDK and JRE 8
+-Java JDK and JRE 8<br>
 -Mysql database 5.7 or higher
 
 <b>Installation</b>
