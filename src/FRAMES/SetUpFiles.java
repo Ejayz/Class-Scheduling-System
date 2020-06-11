@@ -94,30 +94,40 @@ public final class SetUpFiles extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                // 
                 SetUpFiles sf = new SetUpFiles();
+                //
                 sf.setVisible(true);
 
                 Setup st = new Setup();
+                // condition to check if the setup is done from the past.If not it will open the eula frame
                 if (st.checkSetUp() == 1) {
-                    // sf .setVisible(false);
+                    //if this is 1 then it will dispose this SetUpFiles frame and Show the LOG IN frame 
                     sf.dispose();
                     new LOGIN_FRAME().setVisible(true);
 
                 } else {
-
+//If it return 0 this will create set up files and folder to C drive 
                     try {
+                        //Create file to C drive named Command.txt which will contain its commands like making the directory
                         File c = new File("C:\\Command.txt");
                         FileWriter fr = new FileWriter(c);
+                        //writing the command to text file using file writer method
                         fr.write("mkdir C:\\cs_system\\bin\\import\\backup\nmkdir C:\\cs_system\\bin\\export\nmkdir C:\\cs_system\\bin\\import\\setup\nexit");
+                        //Flushing the commands to text file 
                         fr.flush();
+                        //Closing the file writer
                         fr.close();
+                        //create a cmd process to exedcute commands
                         ProcessBuilder pb = new ProcessBuilder("cmd");
+                        //use the Command.txt as input of proccess
                         pb.redirectInput(c);
-
+                        //start the process and transfer it to Process method to use .waitFor() method to detirmine if the process is done or not
                         Process p = pb.start();
+
                         if (p.waitFor() == 0) {
-                            p.destroy();
-                            System.out.println("this");
+                            //if the directory is created then this will procceed to creating files in the directory
+                            //This will create the import command for importing backup sql file
                             File imp = new File("C:\\cs_system\\bin\\import\\input.txt");
                             FileWriter fw = new FileWriter(imp);
                             fw.write("cd C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\n"
@@ -131,7 +141,7 @@ public final class SetUpFiles extends javax.swing.JFrame {
                                     + "exit");
                             fw.flush();
                             fw.close();
-
+//This process will make the export command to backup the data 
                             File exp = new File("C:\\cs_system\\bin\\export\\input.txt");
                             FileWriter fx = new FileWriter(exp);
                             fx.write("cd C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\n"
@@ -139,15 +149,18 @@ public final class SetUpFiles extends javax.swing.JFrame {
                                     + "exit");
                             fx.flush();
                             fx.close();
+                            //This process will create a command file to be feed to process later on .This commands will create the table and data needed to run this program
+
                             File setup = new File("C:\\cs_system\\bin\\import\\setup\\setup.txt");
                             FileWriter fz = new FileWriter(setup);
                             fz.write("cd C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\n"
                                     + "mysql -u root -p1234 -e\"create database cs_system;\"\n"
-                                    + "mysql -u root -p1234 cs_system< C:\\cs_system\\bin\\import\\setup.sql\n"
+                                    + "mysql -u root -p1234 cs_system< C:\\cs_system\\bin\\import\\setup\\setup.sql\n"
                                     + "\n"
                                     + "exit");
                             fz.flush();
                             fz.close();
+                            //This process will make the setup.sql file which will be used by the setup.txt later
                             File query = new File("C:\\cs_system\\bin\\import\\setup\\setup.sql");
                             FileWriter fq = new FileWriter(query);
                             fq.write("/*\n"
@@ -297,40 +310,22 @@ public final class SetUpFiles extends javax.swing.JFrame {
                                     + "/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;");
                             fq.flush();
                             fq.close();
-
-                            File rs = new File("C:\\cs_system\\bin\\import\\rs.bat");
-                            FileWriter rst = new FileWriter(rs);
-                            rst.write("del  C:\\cs_system\\bin\\import\\remove.txt\n"
-                                    + "rmdir /Q /S C:\\cs_system\n"
-                                    + "del rs.bat"
-                            );
-
-                            rst.flush();
-                            rst.close();
-
-                            File Clean = new File("C:\\cs_system\\bin\\import\\setup\\rst.bat");
-                            FileWriter cs = new FileWriter(Clean);
-                            cs.write("del /f/s/q C:\\cs_system\\bin\\import\\setup > nul\n"
-                                    + "rmdir /s/q C:\\cs_system\\bin\\import\\setup"
-                                    + "del /f C:\\Command.txt\n"
-                                    + "del/f rst.bat\n"
-                            );
-
-                            cs.flush();
-                            cs.close();
-
+                            //This will use the setup.txt as input on cmd;
                             pb.redirectInput(setup);
-
-                             
+                            //this will log the output error of cmd process
+                            pb.redirectError(new File("C:/cs_system/bin/error.txt"));
+                           //This will start the process
                             p = pb.start();
 
                             if (p.waitFor() == 0) {
-Process pr=Runtime.getRuntime().exec("C:\\cs_system\\bin\\import\\setup\\rst.bat");
-                            
+//This will dispose this frame
                                 sf.dispose();
-
+//This will show the EULA frame
                                 new SetUp().setVisible(true);
-                            } else {
+                            } 
+                            //This will return the indicator if an error occured
+                            else {
+                                
                                 System.out.println("Unknown error occured");
                             }
                         } else {
