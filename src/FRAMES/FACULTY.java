@@ -72,10 +72,8 @@ public class FACULTY extends javax.swing.JFrame {
         BACKGROUNDFORADDTEACHER.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/BACKFORADDROOM.jpg"))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1280, 800));
         setMinimumSize(new java.awt.Dimension(1280, 800));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1280, 800));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -189,7 +187,7 @@ public class FACULTY extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 140, 30));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, 140, 30));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton4.setText("RESET");
@@ -247,7 +245,9 @@ public class FACULTY extends javax.swing.JFrame {
     private void SEARCHBUTTONActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SEARCHBUTTONActionPerformed
 Add_Faculty AF=new Add_Faculty();
 if(AF.SearchData(search.getText().toUpperCase(), jTable2)==0){
+    
     JOptionPane.showMessageDialog(this,"Cannot find data related to "+search.getText());
+  
 }
     }//GEN-LAST:event_SEARCHBUTTONActionPerformed
 
@@ -362,11 +362,33 @@ if(AF.SearchData(search.getText().toUpperCase(), jTable2)==0){
                         jButton3.setVisible(true);
                         AF.DisplayData(jTable2);
                     }
+                    else{
+                        System.out.println(" error");
+                    }
                 } else {
                     JOptionPane.showMessageDialog(this, "Error:Unknown error occured.Please contact support.");
                 }
             }
+            else{
+                if (AF.UpdateIs_Used_Faculty_Changed(Days, Start, End, Room, "false") == 1) {
+                    if (AF.UpdateIs_Used_Faculty(DAY.getSelectedItem().toString(), "true") == 1) {
+                        JOptionPane.showMessageDialog(this, "Schedule updated successfully");
+                        SECTION.setText("");
+                        DEPARTMENT.setText("");
+                        COURSE_TITLE.setText("");
+                        DAY.setSelectedIndex(0);
+                        SCHED.removeAllItems();
+                        jButton5.setVisible(false);
+                        jButton2.setVisible(false);
+                        jButton3.setVisible(true);
+                        AF.DisplayData(jTable2);
+                    }
+                }
+            }
 
+        }
+        else{
+            System.out.println("Error 2");
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
