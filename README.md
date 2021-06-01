@@ -1,5 +1,6 @@
 # Class Scheduling System
-> Welcome this is Class Scheduling System made by me.This scheduling system will help you manage your schedules in your school. 
+
+> Welcome this is Class Scheduling System made by me.This scheduling system will help you manage your schedules in your school.
 
 ## Requirements
 
@@ -7,6 +8,7 @@
 - [Mysql Community Server 5.7 or higher](https://dev.mysql.com/downloads/mysql/5.7.html)
 
 ## Installation
+
 1. Install your jdk and jre
 2. Install your Mysql database.Give your mysql database a root password: **1234**
 3. Run the file at **/dist/CS_SYSTEM.JAR**
